@@ -27,7 +27,7 @@ const UserController =  {
         try {
             const user = await knex('users').insert({name, email, password: hash, role, createdAt: now});
 
-            return res.status(200).json({
+            return res.status(201).json({
                 message: 'Berhasil menambah data user',
                 data: user
             });
