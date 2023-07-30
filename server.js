@@ -21,9 +21,7 @@ app.use(methodOverride(function (req, res) {
 
 
 app.post('/api/login', AuthController.login);
-
-app.use(authMiddleware)
-app.use('/api/users', userRouter)
+app.use('/api/users', authMiddleware, userRouter)
 
 
 const PORT = 3000;

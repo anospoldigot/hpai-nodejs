@@ -24,6 +24,15 @@ const UserController =  {
         const now = dayjs().format('YYYY-MM-DD hh:mm:ss')
         const hash = bcrypt.hashSync(password, salt);
         
+        const user = await knex('users').where('email', email).first();
+
+
+        if(user){
+            return res.status(422).json({
+                message: 'Email telah digunakan',
+            });
+        }
+
         try {
             const user = await knex('users').insert({name, email, password: hash, role, createdAt: now});
 
